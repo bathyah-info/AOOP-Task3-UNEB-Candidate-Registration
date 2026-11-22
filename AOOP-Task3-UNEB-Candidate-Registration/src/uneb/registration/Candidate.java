@@ -40,6 +40,21 @@ public class Candidate {
                 + this.examinationCentre + " | Fee: UGX " + String.format("%.2f", this.registrationFee));
     }
 
+    public Candidate(String fullName, String schoolCode) {
+        this(fullName, schoolCode, 8);
+    }
+
+    public void confirmRegistration() {
+        this.registrationStatus = "CONFIRMED";
+        System.out.println("[STATUS UPDATE] Candidate " + candidateNumber + " (" + fullName
+                + ") is now " + registrationStatus + " at " + examinationCentre + ".");
+    }
+
+    public void printCandidateSummary() {
+        System.out.printf("  %-18s | %-18s | %-18s | Subjects: %d | Fee: UGX %9.2f | %s%n",
+                candidateNumber, fullName, examinationCentre, subjectCount, registrationFee, registrationStatus);
+    }
+
     public String getCandidateNumber() {
         return candidateNumber;
     }
