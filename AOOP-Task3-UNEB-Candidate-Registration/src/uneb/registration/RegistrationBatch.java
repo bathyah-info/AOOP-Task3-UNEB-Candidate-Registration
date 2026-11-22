@@ -5,6 +5,12 @@ import java.util.Collections;
 import java.util.List;
 import uneb.config.ExamConfiguration;
 
+/**
+ * I made this class to managesa school-level batch of UNEB candidates, enforcing subject-count bounds
+ * (5 to 10 subjects) and duplicate candidate checks while tracking total fees.
+ */
+
+
 public class RegistrationBatch {
     private static final int MIN_SUBJECTS = 5;
     private static final int MAX_SUBJECTS = 10;

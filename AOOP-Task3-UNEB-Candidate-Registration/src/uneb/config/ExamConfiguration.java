@@ -4,6 +4,8 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+
+// Holds central UNEB examination settings for the entire application lifecycle.
 public class ExamConfiguration {
     public static final int EXAM_YEAR;
     public static final double BASE_REGISTRATION_FEE;
@@ -36,16 +38,17 @@ public class ExamConfiguration {
         // Utility configuration class; prevent instantiation
     }
 
+    // Computes the total registration fee for a candidate based on subject count.
     public static double calculateRegistrationFee(int subjectCount) {
         int safeSubjects = Math.max(0, subjectCount);
         return BASE_REGISTRATION_FEE + (safeSubjects * PER_SUBJECT_FEE);
     }
-
+// Builds a default UNEB centre code from a school code.
     public static String assignDefaultCentreCode(String schoolCode) {
         String cleanCode = (schoolCode == null || schoolCode.isBlank()) ? "GEN001" : schoolCode.trim().toUpperCase();
         return DEFAULT_CENTRE_PREFIX + cleanCode;
     }
-
+// Prints the loaded exam year, fee schedule, and grading scale to standard output.
     public static void printConfigurationSummary() {
         System.out.println("=== UNEB CENTRAL CONFIGURATION (" + EXAM_YEAR + ") ===");
         System.out.printf("Base Registration Fee: UGX %.2f%n", BASE_REGISTRATION_FEE);

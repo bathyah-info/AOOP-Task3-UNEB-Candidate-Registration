@@ -3,6 +3,18 @@ package uneb.registration;
 import java.util.concurrent.atomic.AtomicInteger;
 import uneb.config.ExamConfiguration;
 
+/**
+ * This class represents a single UNEB examination candidate and demonstrates per-object
+ * initialization order.
+ * <p><b>Per-Object Execution Order:</b> Every time {@code new Candidate(...)} runs,
+ * instance fields and the instance initialization block execute <b>before</b> the
+ * invoked constructor body—assigning a unique candidate number, default
+ * {@code PENDING_VERIFICATION} status, and a provisional examination centre first,
+ * which the constructor then tailors to the candidate's school and subject count.</p>
+ */
+
+
+
 public class Candidate {
     private static final AtomicInteger CANDIDATE_SEQUENCE = new AtomicInteger(1000);
 
@@ -14,7 +26,7 @@ public class Candidate {
     private int subjectCount;
     private double registrationFee;
 
-    // Executes EVERY TIME a new Candidate object is created, BEFORE the constructor body runs
+    // This executes every time a new Candidate object is created, BEFORE the constructor body runs
     {
         int seq = CANDIDATE_SEQUENCE.incrementAndGet();
         this.candidateNumber = "UNEB-" + ExamConfiguration.EXAM_YEAR + "-" + seq;
