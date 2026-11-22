@@ -35,4 +35,24 @@ public class ExamConfiguration {
     private ExamConfiguration() {
         // Utility configuration class; prevent instantiation
     }
+
+    public static double calculateRegistrationFee(int subjectCount) {
+        int safeSubjects = Math.max(0, subjectCount);
+        return BASE_REGISTRATION_FEE + (safeSubjects * PER_SUBJECT_FEE);
+    }
+
+    public static String assignDefaultCentreCode(String schoolCode) {
+        String cleanCode = (schoolCode == null || schoolCode.isBlank()) ? "GEN001" : schoolCode.trim().toUpperCase();
+        return DEFAULT_CENTRE_PREFIX + cleanCode;
+    }
+
+    public static void printConfigurationSummary() {
+        System.out.println("=== UNEB CENTRAL CONFIGURATION (" + EXAM_YEAR + ") ===");
+        System.out.printf("Base Registration Fee: UGX %.2f%n", BASE_REGISTRATION_FEE);
+        System.out.printf("Per-Subject Fee:       UGX %.2f%n", PER_SUBJECT_FEE);
+        System.out.println("Grading Policy:");
+        for (Map.Entry<String, String> entry : GRADING_POLICY.entrySet()) {
+            System.out.println("  " + entry.getKey() + " -> " + entry.getValue());
+        }
+    }
 }
